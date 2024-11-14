@@ -7,9 +7,6 @@ import asyncio
 import random
 from keep_alive import keep_alive
 
-from keep_alive import keep_alive
-
-
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
 
@@ -20,6 +17,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 # Variables pour gérer le spam de messages et de GIFs
 is_spamming = False
 spam_task = None
+spammer = None  # Identifiant de l'utilisateur ayant lancé le spam
 is_spamming_gif = False
 gif_spam_task = None
 
@@ -40,13 +38,14 @@ async def on_ready():
 # Commande /spamm
 @bot.tree.command(name="spamm", description="Commence à spammer un message.")
 async def spamm(interaction: discord.Interaction, message: str):
-    global is_spamming, spam_task
+    global is_spamming, spam_task, spammer
 
     if is_spamming:
         await interaction.response.send_message("Le spam est déjà en cours !", ephemeral=True)
         return
 
     is_spamming = True
+    spammer = interaction.user.id  # Enregistre l'identifiant de l'utilisateur ayant lancé le spam
     await interaction.response.send_message(f"Début du spam : `{message}`")
 
     # Tâche de spam
@@ -60,13 +59,19 @@ async def spamm(interaction: discord.Interaction, message: str):
 # Commande /stop pour arrêter le spam
 @bot.tree.command(name="stop", description="Arrête le spam.")
 async def stop(interaction: discord.Interaction):
-    global is_spamming, spam_task
+    global is_spamming, spam_task, spammer
 
     if not is_spamming:
         await interaction.response.send_message("Aucun spam en cours.", ephemeral=True)
         return
 
+    # Vérifie si l'utilisateur est celui qui a lancé le spam
+    if interaction.user.id != spammer:
+        await interaction.response.send_message("Seul l'utilisateur ayant lancé le spam peut l'arrêter.", ephemeral=True)
+        return
+
     is_spamming = False
+    spammer = None
     if spam_task:
         spam_task.cancel()  # Arrête la tâche
         spam_task = None
@@ -117,6 +122,5 @@ async def mdrstop(interaction: discord.Interaction):
     await interaction.response.send_message("Spam des GIFs arrêté.")
 
 # Démarrer le bot
-
 keep_alive()
 bot.run(token)
