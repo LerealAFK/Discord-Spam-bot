@@ -5,3 +5,5 @@ This bot discord has multiple commands. It is in developpement so new commands w
 
 /spamm [messages] to spamm a message
 /stop to stop the message
+
+
