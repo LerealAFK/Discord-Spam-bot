@@ -65,10 +65,7 @@ async def stop(interaction: discord.Interaction):
         await interaction.response.send_message("Aucun spam en cours.", ephemeral=True)
         return
 
-    # Vérifie si l'utilisateur est celui qui a lancé le spam
-    if interaction.user.id != spammer:
-        await interaction.response.send_message("Seul l'utilisateur ayant lancé le spam peut l'arrêter.", ephemeral=True)
-        return
+    
 
     is_spamming = False
     spammer = None
