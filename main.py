@@ -108,6 +108,6 @@ async def mdrstop(interaction: discord.Interaction):
     await interaction.response.send_message("Spam des GIFs arrêté.")
 
 # Démarrer le bot
-TOKEN = "MTMwNTc4NDk5NzgwNTgyMjAwMg.GBcs70.RHB3homz1RPGSsxfzJckYP3ky_wUjytXxO19nc"
-print(TOKEN) # Remplace par le token de ton bot
+TOKEN = "MTMwNTc4NDk5NzgwNTgyMjAwMg.G7mXUd.a7jNpsR1iMxmaDeYmvR4jctZBA8I3800heJIZs"
+print(TOKEN) 
 bot.run(TOKEN)
