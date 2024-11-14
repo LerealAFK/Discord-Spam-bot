@@ -1,8 +1,17 @@
+import os
+from dotenv import load_dotenv
 import discord
 from discord import app_commands
 from discord.ext import commands
 import asyncio
 import random
+from keep_alive import keep_alive
+
+from keep_alive import keep_alive
+
+
+load_dotenv()
+token = os.getenv('DISCORD_TOKEN')
 
 # Configuration du bot
 intents = discord.Intents.default()
@@ -108,6 +117,6 @@ async def mdrstop(interaction: discord.Interaction):
     await interaction.response.send_message("Spam des GIFs arrêté.")
 
 # Démarrer le bot
-TOKEN = "MTMwNTc4NDk5NzgwNTgyMjAwMg.G7mXUd.a7jNpsR1iMxmaDeYmvR4jctZBA8I3800heJIZs"
-print(TOKEN) 
-bot.run(TOKEN)
+
+keep_alive()
+bot.run(token)
