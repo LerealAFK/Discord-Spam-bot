@@ -4,9 +4,10 @@ This bot discord has multiple commands. It is in developpement so new commands w
 # Commands
 
 /spamm [messages] to spamm a message                 
-/stop to stop the message                   
+/stop spamid: to stop the message                   
 /mdr loop: True/false sends random gifs             
-/mdrstop stop the spam of the gifs
+/mdrstop stop the spam of the gifs                
+/listspams affiche tous les spams en cours
 
 # In developpement
 
