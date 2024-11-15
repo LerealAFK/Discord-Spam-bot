@@ -40,10 +40,6 @@ async def on_ready():
 async def spamm(interaction: discord.Interaction, message: str):
     global is_spamming, spam_task, spammer
 
-    if is_spamming:
-        await interaction.response.send_message("Le spam est déjà en cours !", ephemeral=True)
-        return
-
     is_spamming = True
     spammer = interaction.user.id  # Enregistre l'identifiant de l'utilisateur ayant lancé le spam
     await interaction.response.send_message(f"Début du spam : `{message}`")
