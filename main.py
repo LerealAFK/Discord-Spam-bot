@@ -52,10 +52,6 @@ async def stop(interaction: discord.Interaction, spam_id: int):
 
     spam_task, user_id = active_spams[spam_id]
 
-    # Vérifie si l'utilisateur est autorisé à arrêter le spam
-    if interaction.user.id != user_id:
-        await interaction.response.send_message("❌ Vous n'êtes pas autorisé à arrêter ce spam.", ephemeral=True)
-        return
 
     # Arrêter et supprimer la tâche de spam
     spam_task.cancel()
